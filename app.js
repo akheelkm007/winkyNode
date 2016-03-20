@@ -8,7 +8,31 @@ var bodyParser = require('body-parser');
 //Database Access
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/userList');
+
+
+
+
+var connection_string = '127.0.0.1:27017/userList';
+// if OPENSHIFT env variables are present, use the available connection info:
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}
+var db =  monk(connection_string);
+//var db = monk('localhost:27017/userList');
+
+
+
+
+
+
+
+
+
+
 
 //Session Management
 var sessions = require("client-sessions");
@@ -84,6 +108,19 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
+
+
+// var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+// var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+// app.listen(port, ipaddress, function() {
+// //app.listen(3000, function() {
+//     // Do your stuff
+//      console.log('winky app listening');
+// });
+
+
 
 
 module.exports = app;
