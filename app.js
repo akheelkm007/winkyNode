@@ -112,13 +112,13 @@ app.use(function(err, req, res, next) {
 
 
 
-// var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-// var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-// app.listen(port, ipaddress, function() {
-// //app.listen(3000, function() {
-//     // Do your stuff
-//      console.log('winky app listening');
-// });
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+app.listen(port, ipaddress, function() {
+//app.listen(3000, function() {
+    // Do your stuff
+     console.log('winky app listening');
+});
 
 
 
