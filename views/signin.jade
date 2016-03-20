@@ -1,0 +1,35 @@
+doctype html
+html
+	head
+		title= title
+		meta(name="google-signin-client_id", content="599569995961-ua9hfnhmahlv944im14sbg7n58d2gp5a.apps.googleusercontent.com")
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src="/javascripts/GoogleSignIn.js" , async defer)
+
+	body
+		div(class="g-signin2", data-onsuccess="onSignIn")
+		a(href="#" , onclick="signOut();").
+			Sign Out
+
+		script.
+			function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			var id_token = googleUser.getAuthResponse().id_token;
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/signintoken');
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.onload = function() {
+			  if (xhr.responseText == "success")
+			  location.assign("/");
+			};
+			xhr.send('idtoken=' + id_token);
+
+			}
+
+
+			function signOut() {
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+			console.log('User signed out.');
+			});
+			}
