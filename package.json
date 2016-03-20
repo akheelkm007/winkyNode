@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node app.js"
   },
+  "main": "app.js",
   "dependencies": {
     "body-parser": "~1.13.2",
     "client-sessions": "^0.7.0",
