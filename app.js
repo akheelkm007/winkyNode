@@ -113,9 +113,9 @@ app.use(function(err, req, res, next) {
 
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 app.listen(port, ipaddress, function() {
-//app.listen(3000, function() {
+//app.listen(8080, function() {
     // Do your stuff
      console.log('winky app listening');
 });
